@@ -21,9 +21,9 @@ class _TambahTransaksiPageState extends State<TambahTransaksiPage> {
       lastDate: DateTime.now(),
     );
 
-    if (pickedDate != null && pickedDate != _selectedDate) {
+    if (pickedDate != _selectedDate) {
       setState(() {
-        _selectedDate = pickedDate;
+        _selectedDate = pickedDate!;
       });
     }
   }

@@ -27,9 +27,9 @@ class _TambahPenghuniPageState extends State<TambahPenghuniPage> {
       lastDate: DateTime.now(),
     );
 
-    if (pickedDate != null && pickedDate != _selectedDate) {
+    if (pickedDate != _selectedDate) {
       setState(() {
-        _selectedDate = pickedDate;
+        _selectedDate = pickedDate!;
       });
     }
   }
@@ -68,7 +68,8 @@ class _TambahPenghuniPageState extends State<TambahPenghuniPage> {
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(labelText: 'Nama', icon: Icon(Icons.person)),
+                decoration: InputDecoration(
+                    labelText: 'Nama', icon: Icon(Icons.person)),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Nama tidak boleh kosong';
@@ -78,11 +79,15 @@ class _TambahPenghuniPageState extends State<TambahPenghuniPage> {
               ),
               TextFormField(
                 controller: _phoneController,
-                decoration: InputDecoration(labelText: 'No. Telepon', icon: Icon(Icons.phone)),
+                decoration: InputDecoration(
+                    labelText: 'No. Telepon', icon: Icon(Icons.phone)),
                 keyboardType: TextInputType.number,
                 maxLength: 12,
                 validator: (value) {
-                  if (value == null || value.isEmpty || value.length < 11 || value.length > 12) {
+                  if (value == null ||
+                      value.isEmpty ||
+                      value.length < 11 ||
+                      value.length > 12) {
                     return 'Nomor Telepon tidak boleh kosong';
                   }
                   return null;
@@ -90,7 +95,8 @@ class _TambahPenghuniPageState extends State<TambahPenghuniPage> {
               ),
               TextFormField(
                 controller: _priceController,
-                decoration: InputDecoration(labelText: 'Harga', icon: Icon(Icons.credit_card)),
+                decoration: InputDecoration(
+                    labelText: 'Harga', icon: Icon(Icons.credit_card)),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -103,7 +109,8 @@ class _TambahPenghuniPageState extends State<TambahPenghuniPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Icon(Icons.date_range),
-                  Text('Tanggal Masuk: ${_selectedDate.toLocal().toIso8601String().split('T')[0]}'),
+                  Text(
+                      'Tanggal Masuk: ${_selectedDate.toLocal().toIso8601String().split('T')[0]}'),
                   TextButton(
                     onPressed: _pickDate,
                     child: Text('Pilih Tanggal'),
@@ -116,8 +123,11 @@ class _TambahPenghuniPageState extends State<TambahPenghuniPage> {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(backgroundColor: _gender == 'Laki-laki' ? Colors.orange : Colors.grey),
-                        onPressed: (){
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: _gender == 'Laki-laki'
+                                ? Colors.orange
+                                : Colors.grey),
+                        onPressed: () {
                           setState(() {
                             _gender = 'Laki-laki';
                           });
@@ -128,7 +138,11 @@ class _TambahPenghuniPageState extends State<TambahPenghuniPage> {
                     SizedBox(width: 10),
                     Expanded(
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(backgroundColor: _gender == 'Perempuan' ? Colors.orange : Colors.grey,),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: _gender == 'Perempuan'
+                              ? Colors.orange
+                              : Colors.grey,
+                        ),
                         onPressed: () {
                           setState(() {
                             _gender = 'Perempuan';
@@ -142,7 +156,8 @@ class _TambahPenghuniPageState extends State<TambahPenghuniPage> {
               ),
               DropdownButtonFormField<String>(
                 value: _blok,
-                decoration: InputDecoration(labelText: 'Blok', icon: Icon(Icons.king_bed)),
+                decoration: InputDecoration(
+                    labelText: 'Blok', icon: Icon(Icons.king_bed)),
                 items: ['B', 'C'].map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -157,7 +172,8 @@ class _TambahPenghuniPageState extends State<TambahPenghuniPage> {
               ),
               TextFormField(
                 initialValue: _noblok.toString(),
-                decoration: InputDecoration(labelText: 'Nomor Blok', icon: Icon(Icons.home)),
+                decoration: InputDecoration(
+                    labelText: 'Nomor Blok', icon: Icon(Icons.home)),
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   _noblok = int.parse(value);
@@ -165,7 +181,9 @@ class _TambahPenghuniPageState extends State<TambahPenghuniPage> {
               ),
               TextFormField(
                 initialValue: _numb.toString(),
-                decoration: InputDecoration(labelText: 'Nomor Kamar', icon: Icon(Icons.format_list_numbered)),
+                decoration: InputDecoration(
+                    labelText: 'Nomor Kamar',
+                    icon: Icon(Icons.format_list_numbered)),
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   _numb = int.parse(value);
